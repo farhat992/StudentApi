@@ -3,9 +3,10 @@ using System.Collections.Generic;
 
 namespace StudentApi
 {
-    public class DataAccessLayer:DbContext
+    public class DataAccessLayer : DbContext
     {
         public DbSet<Student> Students { get; set; }
+        //public ICollection<Student> student { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);

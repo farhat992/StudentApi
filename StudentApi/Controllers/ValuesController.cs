@@ -18,6 +18,7 @@ namespace StudentApi.Controllers
 
    };*/
         private DataAccessLayer _context=new DataAccessLayer();
+        
        
         public ValuesController(DataAccessLayer context)
         {
@@ -26,7 +27,6 @@ namespace StudentApi.Controllers
                 new Student() { Name = "john", FatherName = "john doe", Dob = "30feb" },
                 new Student() { Name = "Alan", FatherName = "alan doe", Dob = "18feb" });
             _context.SaveChanges();
-
         }  
         [HttpGet]
         public async Task <IActionResult> GetAll()
@@ -35,6 +35,21 @@ namespace StudentApi.Controllers
                                         
             return Ok(_products);
         }
+        [HttpGet("{id}")]
+        public async Task <IActionResult> GetB(int id) {
+            
+            var _products = await _context.Students.FindAsync(id);
+            return Ok(_products);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody]Student student) 
+        {
+             await _context.Students.AddAsync(student);
+            _context.SaveChanges();
+            //return CreatedAtRoute("GetStudent",new {id=student.Id},student);
+            return Ok(student);
+        }
+            
 
 
 
